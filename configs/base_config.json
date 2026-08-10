@@ -10,10 +10,7 @@
       "random_horizontal_flip": {
         "p": 0.5
       },
-      "random_crop": {
-        "size": 224,
-        "padding": 4
-      },
+      "color_jitter": {},
       "to_tensor": {},
       "normalize": {}
     }
@@ -23,7 +20,7 @@
     "dropout": 0.5
   },
   "training": {
-    "epochs": 10,
+    "epochs": 50,
     "optimizer": "Adam",
     "learning_rate": 0.0005,
     "weight_decay": 0.0004,
