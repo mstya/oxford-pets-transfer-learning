@@ -64,7 +64,8 @@ def save_summary(save_path,
                   best_val_loss,
                   best_epoch,
                   dropout,
-                  scheduler_config):
+                  scheduler_config,
+                  label_smoothing=0.0):
     summary = {
         "Experiment": f"Exp #{str(exp_number)}",
         "Timestamp": time.strftime("%d/%m/%Y %H:%M:%S", time.localtime()),
@@ -74,6 +75,7 @@ def save_summary(save_path,
         "Optimizer": optimizer,
         "Learning Rate": learning_rate,
         "Weight Decay": weight_decay,
+        "Label Smoothing": label_smoothing,
         "Dropout": dropout,
         "Seed": seed,
         "Final Val accuracy": val_accuracy,
@@ -113,7 +115,8 @@ def save_results(results_dir,
                   seed,
                   augmentation,
                   dropout,
-                  scheduler_config):
+                  scheduler_config,
+                  label_smoothing=0.0):
     train_losses, val_losses, val_accuracies, train_accuracy = metrics
     best_index = max(range(len(val_accuracies)), key=val_accuracies.__getitem__)
     best_val_accuracy = val_accuracies[best_index]
@@ -125,7 +128,7 @@ def save_results(results_dir,
 
     save_summary(results_dir, exp_number, learning_rate, final_val_accuracy, model_name, epoch, batch_size,
                  optimizer, weight_decay, seed, augmentation, final_val_loss, best_val_accuracy, best_val_loss,
-                 best_epoch, dropout, scheduler_config)
+                 best_epoch, dropout, scheduler_config, label_smoothing)
     save_metrics(exp_path, metrics)
 
 

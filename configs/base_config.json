@@ -24,6 +24,7 @@
     "optimizer": "Adam",
     "learning_rate": 0.0005,
     "weight_decay": 0.0004,
+    "label_smoothing": 0.1,
     "scheduler": {
       "name": "ReduceLROnPlateau",
       "mode": "min",
