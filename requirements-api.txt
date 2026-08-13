@@ -1,0 +1,11 @@
+# Slim dependency set for serving the API - deliberately excludes training-only
+# deps (matplotlib, pandas, fastai, displaytree) to keep the image small.
+#
+# torch/torchvision are installed separately in the Dockerfile from the CPU-only
+# wheel index (the container has no GPU/MPS access anyway), so they're not listed
+# here to avoid pip pulling the much larger CUDA-enabled build.
+numpy>=2.0.0
+pillow>=11.0.0
+fastapi>=0.115.0
+uvicorn>=0.30.0
+python-multipart>=0.0.9

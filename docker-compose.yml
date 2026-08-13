@@ -1,0 +1,16 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Which experiments/<N> checkpoint to bake into the image. No
+        # hardcoded default: configs/serving_config.json is the single source
+        # of truth for this number. Set via `make serve`, or export
+        # MODEL_EXPERIMENT yourself before calling `docker compose up --build`
+        # (left blank otherwise - the Dockerfile fails with a clear message at
+        # build time rather than compose failing on every subcommand,
+        # including ones like `down` that don't touch build args at all).
+        MODEL_EXPERIMENT: "${MODEL_EXPERIMENT:-}"
+    ports:
+      - "8000:8000"

@@ -1,0 +1,20 @@
+.venv/
+.git/
+.idea/
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Raw Oxford-IIIT Pet images/annotations (hundreds of MB) - never needed to
+# serve the API, only to train.
+data/
+
+# Notebooks aren't needed at runtime.
+notebooks/
+
+# Keep experiments/ available (the Dockerfile COPYs a single experiment's
+# checkpoint from it via a bind mount), but drop the large plots that aren't
+# used by the API.
+experiments/*/results.png

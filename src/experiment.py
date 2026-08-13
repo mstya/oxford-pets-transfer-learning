@@ -65,7 +65,8 @@ def save_summary(save_path,
                   best_epoch,
                   dropout,
                   scheduler_config,
-                  label_smoothing=0.0):
+                  label_smoothing=0.0,
+                  unfreeze_from_block=None):
     summary = {
         "Experiment": f"Exp #{str(exp_number)}",
         "Timestamp": time.strftime("%d/%m/%Y %H:%M:%S", time.localtime()),
@@ -77,6 +78,7 @@ def save_summary(save_path,
         "Weight Decay": weight_decay,
         "Label Smoothing": label_smoothing,
         "Dropout": dropout,
+        "Unfreeze From Block": unfreeze_from_block,
         "Seed": seed,
         "Final Val accuracy": val_accuracy,
         "Final Val loss": val_loss,
@@ -116,7 +118,8 @@ def save_results(results_dir,
                   augmentation,
                   dropout,
                   scheduler_config,
-                  label_smoothing=0.0):
+                  label_smoothing=0.0,
+                  unfreeze_from_block=None):
     train_losses, val_losses, val_accuracies, train_accuracy = metrics
     best_index = max(range(len(val_accuracies)), key=val_accuracies.__getitem__)
     best_val_accuracy = val_accuracies[best_index]
@@ -128,7 +131,7 @@ def save_results(results_dir,
 
     save_summary(results_dir, exp_number, learning_rate, final_val_accuracy, model_name, epoch, batch_size,
                  optimizer, weight_decay, seed, augmentation, final_val_loss, best_val_accuracy, best_val_loss,
-                 best_epoch, dropout, scheduler_config, label_smoothing)
+                 best_epoch, dropout, scheduler_config, label_smoothing, unfreeze_from_block)
     save_metrics(exp_path, metrics)
 
 
